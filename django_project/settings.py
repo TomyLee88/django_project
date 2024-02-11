@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-d=91*_i!*(x&cf%7%$p)kjcoy9_6@*los9f7#ht#uxp&#1c$51
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', os.environ.get('RENDER_HOSTNAME', '')]
 
 
 # Application definition
@@ -134,3 +134,10 @@ LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'login'
 MEDIA_ROOT = BASE_DIR / 'media' # Newer modern and Pythonic way
 MEDIA_URL = '/media/'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER'] 
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD'] 
