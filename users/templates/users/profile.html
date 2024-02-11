@@ -1,0 +1,62 @@
+{% extends "social_network/base.html" %}
+{% load crispy_forms_tags %}
+{% block title %}User Profile{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">User Information</h5>
+                    <p class="card-text">Username: {{ user.username }}</p>
+                    <p class="card-text">Email: {{ user.email }}</p>
+                </div>
+            </div>
+            <div class="content-section">
+            </div>
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">User Posts</h5>
+                    {% if user.posts.all %}
+                        <ul class="list-group">
+                            {% for post in user.posts.all %}
+                                <li class="list-group-item">{{ post.title }}</li>
+                                <li class="list-group-item">{{ post.author }}</li>
+                                <li class="list-group-item">{{ post.content }}</li>
+                                <li class="list-group-item">{{ post.created_at }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="card-text">No posts found.</p>
+                    {% endif %}
+                </div>
+            </div>
+            <!-- User Friendships Section -->
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Friendships</h5>
+                    {% if user.friendships_initiated.all %}
+                        <ul class="list-group">
+                            {% for friendship in user.friendships_initiated.all %}
+                                <li class="list-group-item">Friend: {{ friendship.friend.username }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p class="card-text">No friendships initiated.</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <!-- Sidebar Section -->
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Sidebar</h5>
+                    <p class="card-text">You can put any additional information here.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

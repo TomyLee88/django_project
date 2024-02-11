@@ -1,0 +1,16 @@
+{% extends "social_network/base.html" %}
+{% block content %}
+{% if posts %}
+{% if user.posts.all %}
+<ul class="list-group">
+    {% for post in user.posts.all %}
+        <li class="list-group-item">{{ post.title }}</li>
+        <li class="list-group-item">{{ post.author }}</li>
+        <li class="list-group-item">{{ post.content }}</li>
+        <li class="list-group-item">{{ post.created_at }}</li>
+    {% endfor %}
+</ul>
+{% else %}
+<p class="card-text">No posts found.</p>
+{% endif %}
+{% endblock %}

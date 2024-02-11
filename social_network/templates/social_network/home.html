@@ -1,0 +1,28 @@
+{% extends 'social_network/base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <h1 class="display-4">Welcome to Social Network</h1>
+    <p class="lead">Connect with friends, share updates, and stay connected with the world.</p>
+    <hr class="my-4">
+    <p>Sign up now and join the community!</p>
+    <a class="btn btn-primary btn-lg" href="{% url 'register' %}" role="button">Sign up</a>
+</div>
+<div class="container">
+    <h2>All Posts</h2>
+    {% if user.posts.all %}
+        <ul class="list-group">
+             {% for post in user.posts.all %}
+                <li class="list-group-item">{{ post.title }}</li>
+                <li class="list-group-item">{{ post.author }}</li>
+                <li class="list-group-item">{{ post.content }}</li>
+                <li class="list-group-item">{{ post.created_at }}</li>
+             {% endfor %}
+         </ul>
+    {% else %}
+            <p> class="card-text">No posts found.</p>
+    {% endif %}
+</div>
+{% endblock %}
